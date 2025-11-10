@@ -11,6 +11,9 @@
     "prisma:generate": "dotenv -e .env.local -- npx prisma generate"
   },
   "dependencies": {
+    "@nivo/core": "^0.99.0",
+    "@nivo/line": "^0.99.0",
+    "@nivo/pie": "^0.99.0",
     "@prisma/client": "^6.19.0",
     "dotenv": "^17.2.3",
     "firebase": "^12.5.0",

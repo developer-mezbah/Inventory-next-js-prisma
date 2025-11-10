@@ -24,17 +24,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "./style.css";
 
+const mainRoute = "/inventory";
+
 const initMenuItems = [
   {
-    name: "Home", icon: <TiHomeOutline />
-    , href: "/home"
+    name: "Home", icon: <TiHomeOutline />, href: mainRoute
   },
   {
     name: "Parties",
     icon: <PiUsers />,
     subItems: [
-      { name: "Party Details", href: "/cms/speaking-part-1/part-one" },
-      { name: "Loyalty Points", href: "/cms/speaking-part-1/category" },
+      { name: "Party Details", href: mainRoute + "/parties/party-details" },
+      { name: "Loyalty Points", href: mainRoute + "/parties/loyalty-points" },
     ],
   },
   {
@@ -363,7 +364,7 @@ const Layout = (props) => {
         className={`mt-[70px] w-full transition-all ${toggleSidebar ? "md:ml-[256px] ml-0" : "ml-0"
           }`}
       >
-        <div className="md:px-5 px-1"> {props.children}</div>
+        <div>{props.children}</div>
       </div>
       {/* Top Bar */}
       <div
