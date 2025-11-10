@@ -40,8 +40,12 @@ const initMenuItems = [
   },
   {
     name: "Items",
-    icon: <TbShoppingBag />,
-    href: "/invetory/items",
+    icon: <TbShoppingBag />, subItems: [
+      { name: "Products", href: mainRoute + "/items/products" },
+      { name: "Services", href: mainRoute + "/items/services" },
+      { name: "Category", href: mainRoute + "/items/category" },
+      { name: "Units", href: mainRoute + "/items/units" },
+    ],
   },
   {
     name: "Sales",
