@@ -2,3 +2,6 @@ npx prisma db push
 npx prisma generate
 
 {addItemDD && <div className="fixed inset-0 z-10" onClick={() => setAddItemDD(!addItemDD)} />}
+
+
+  const fromCalederRef = useOutsideClick(() => setShowFromPicker(false));
