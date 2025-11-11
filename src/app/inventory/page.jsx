@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex bg-gray-100">
       <div className="flex-grow text-gray-800">
         {/* <header className="flex items-center h-20 px-6 sm:px-10 bg-white">
           <button className="block sm:hidden relative flex-shrink-0 p-2 mr-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800 rounded-full">
@@ -118,7 +118,7 @@ const page = () => {
               <h2 className="text-gray-600 ml-0.5">Sailing Information</h2>
             </div>
             <div className="flex flex-wrap items-start justify-end -mb-3">
-              <button className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+              <button className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 bg-white border-2 focus:bg-purple-100 border-purple-600 rounded-md mb-3">
                 <svg
                   aria-hidden="true"
                   fill="none"
@@ -250,7 +250,7 @@ const page = () => {
             </div>
           </section>
           <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
-            <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
+            <div className="md:flex hidden flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
               <div className="px-6 py-5 font-semibold border-b border-gray-100">
                 Total sale
               </div>

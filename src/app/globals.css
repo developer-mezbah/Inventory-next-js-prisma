@@ -126,3 +126,7 @@ body {
   animation: zoom-in-95 200ms ease-out;
 }
 
+.bg-opacity-50 {
+   background: rgb(0, 0, 0, 0.5);
+}
+

@@ -21,6 +21,12 @@ const Products = () => {
     const activeTab = searchParams.get('tab') || 'general';
     const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For mobile view
 
+    const [openDropdownId, setOpenDropdownId] = useState(null);
+
+    // Placeholder functions for dropdown actions
+    const handleView = (tabId) => { console.log('Viewing tab:', tabId); /* Your view logic */ setOpenDropdownId(null); };
+    const handleDelete = (tabId) => { console.log('Deleting tab:', tabId); /* Your delete logic */ setOpenDropdownId(null); };
+
     const tabs = [
         { id: "general", label: "General", amount: 100 },
         { id: "files-media", label: "Files & Media", amount: 2 },
@@ -108,7 +114,7 @@ const Products = () => {
                             </button>
                             {addItemDD && <div className="fixed inset-0 z-10" onClick={() => setAddItemDD(!addItemDD)} />}
                             <div className={`shadow-xl z-20 p-3 justify-between items-center bg-white border gap-2 absolute right-0 cursor-pointer rounded-lg ${addItemDD ? "animate-in flex" : "hidden"}`}>
-                                
+
                                 <FaRegFileAlt />
                                 <span>Import Items</span>
                             </div>
@@ -175,24 +181,78 @@ const Products = () => {
                                 // Find the original index for color styling
                                 const originalIndex = tabs.findIndex(t => t.id === tab.id);
                                 const colorStyle = colorPalette[originalIndex % colorPalette.length];
+                                // Check if the current tab's dropdown is open
+                                const isDropdownOpen = openDropdownId === tab.id;
 
                                 return (
-                                    <button
+                                    <div
                                         key={tab.id}
-                                        onClick={() => handleTabChange(tab.id)}
-                                        // Added a transition class for the smooth effect on appearance/disappearance
-                                        className={`py-2 px-4 text-left rounded-md font-medium transition-all duration-300 ease-in-out flex justify-between items-center flex-wrap ${activeTab === tab.id
+                                        // The main item is now a div or a list item to contain the button and the dropdown
+                                        // The button will handle the main tab click, and the dropdown button will handle the menu
+                                        className={`py-2 px-4 text-left rounded-md font-medium transition-all duration-300 ease-in-out flex justify-between items-center ${activeTab === tab.id
                                             ? "bg-blue-100 text-blue-600"
                                             : "text-gray-600 hover:bg-gray-100"
                                             }`}
                                     >
-                                        {tab.label}
-                                        <span
-                                            className={`${colorStyle.bg} ${colorStyle.text} px-2 py-0.5 ml-2 rounded-full text-xs font-semibold`}
+                                        {/* Left side: Tab Label */}
+                                        <button
+                                            onClick={() => handleTabChange(tab.id)}
+                                            className="flex-grow text-left focus:outline-none"
                                         >
-                                            {tab?.amount}
-                                        </span>
-                                    </button>
+                                            {tab.label}
+                                        </button>
+
+                                        {/* Right side: Amount and Dropdown Menu (Flex container for alignment) */}
+                                        <div className="flex items-center space-x-3 relative">
+                                            {/* Tab Amount */}
+                                            <span
+                                                className={`${colorStyle.bg} ${colorStyle.text} px-2 py-0.5 rounded-full text-xs font-semibold`}
+                                            >
+                                                {tab?.amount}
+                                            </span>
+
+                                            {/* Three Dots Button for Dropdown */}
+                                            <button
+                                                onClick={(e) => {
+                                                    // Stop event propagation to prevent the main tab click
+                                                    e.stopPropagation();
+                                                    // Toggle the dropdown state for this tab
+                                                    setOpenDropdownId(isDropdownOpen ? null : tab.id);
+                                                }}
+                                                className={`p-1 rounded-full hover:bg-gray-200 focus:outline-none ${isDropdownOpen ? 'bg-gray-200' : ''}`}
+                                                aria-expanded={isDropdownOpen}
+                                                aria-label="More options"
+                                            >
+                                                {/* Three Dots Icon (Horizontal ellipsis) */}
+                                                <span className="text-xl leading-none">...</span>
+                                            </button>
+
+                                            {/* Dropdown Content */}
+                                            {isDropdownOpen && <div className="fixed inset-0 z-10" onClick={() => setOpenDropdownId(null)} />}
+                                            {isDropdownOpen && (
+                                                <div className="absolute right-0 md:top-full -top-[80px] mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-20">
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleView(tab.id); // Call your view function
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    >
+                                                        View
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleDelete(tab.id); // Call your delete function
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 );
                             })
                         ) : (

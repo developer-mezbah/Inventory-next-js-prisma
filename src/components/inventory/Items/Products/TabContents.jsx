@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { FaRegEdit } from "react-icons/fa";
-import { RiWhatsappFill } from "react-icons/ri";
 import TransactionsTable from './TransactionsTable';
 import { LuSlidersHorizontal } from 'react-icons/lu';
 import { BiShare } from 'react-icons/bi';
+import AdjustItem from './AdjustItem';
+import ShareBar from './ShareBar';
 
 // Mock data structure
 const productData = {
@@ -65,19 +65,22 @@ const DetailItem = ({ label, value, isMonetary = false, isQuantity = false, curr
 
 const TabContents = () => {
     const { name, currencySymbol, ...details } = productData;
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isShareBarOpen, setIsShareBarOpen] = useState(false);
+    const itemToAdjust = { id: 1, name: 'Premium Coffee Beans' };
 
-  // Split details into left and right columns for desktop view
-  const leftDetails = [
-    { label: 'SALE PRICE', value: details.salePrice },
-    { label: 'PURCHASE PRICE', value: details.purchasePrice },
-    { label: 'Available for Sale', value: details.availableForSale, isQuantity: true },
-  ];
+    // Split details into left and right columns for desktop view
+    const leftDetails = [
+        { label: 'SALE PRICE', value: details.salePrice },
+        { label: 'PURCHASE PRICE', value: details.purchasePrice },
+        { label: 'Available for Sale', value: details.availableForSale, isQuantity: true },
+    ];
 
-  const rightDetails = [
-    { label: 'STOCK QUANTITY', value: details.stockQuantity },
-    { label: 'STOCK VALUE', value: details.stockValue },
-    { label: 'RESERVED QUANTITY', value: details.reservedQuantity },
-  ];
+    const rightDetails = [
+        { label: 'STOCK QUANTITY', value: details.stockQuantity },
+        { label: 'STOCK VALUE', value: details.stockValue },
+        { label: 'RESERVED QUANTITY', value: details.reservedQuantity },
+    ];
 
     return (
         <div className="font-inter antialiased">
@@ -90,17 +93,28 @@ const TabContents = () => {
                     <div className="flex justify-between items-center pb-3 border-b border-gray-100 mb-4">
 
                         {/* Product Name and Icon */}
-                        <div className="flex items-center text-sm sm:text-lg font-semibold text-gray-800 tracking-wider">
+                        <div className="flex relative items-center overflow-visible text-sm sm:text-lg font-semibold text-gray-800 tracking-wider">
                             <span className="uppercase mr-2">{name}</span>
-                            <BiShare className="w-4 h-4 text-gray-500 hover:text-blue-500 cursor-pointer transition-colors" />
+                            <BiShare onClick={() => setIsShareBarOpen(!isShareBarOpen)} className="w-4 h-4 text-gray-500 hover:text-blue-500 cursor-pointer transition-colors">
+                            </BiShare>
+                            {isShareBarOpen && <div className="fixed inset-0 z-10" onClick={() => setIsShareBarOpen(!isShareBarOpen)} />}
+                             <div className={`absolute z-20 sm:-right-100 top-5 w-100 ${isShareBarOpen ? "block": "hidden"}`}><ShareBar /></div>
                         </div>
+                       
 
                         {/* Adjust Item Button */}
-                        <button className="flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-150 ease-in-out">
+                        <button onClick={() => setIsModalOpen(true)} className="flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-150 ease-in-out">
                             <LuSlidersHorizontal className="w-4 h-4 mr-2" />
                             ADJUST ITEM
                         </button>
                     </div>
+                    {/*  */}
+                    
+                    <AdjustItem
+                        isVisible={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        item={itemToAdjust}
+                    />
 
                     {/* Details Grid Section - Responsive Layout */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
