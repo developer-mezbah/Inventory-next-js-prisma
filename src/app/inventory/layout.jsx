@@ -39,6 +39,15 @@ const initMenuItems = [
     ],
   },
   {
+    name: "Testing Pages",
+    icon: <PiUsers />,
+    subItems: [
+      { name: "Purchase Form", href: mainRoute + "/testing/purchase-form" },
+      { name: "Item Form", href: mainRoute + "/testing/item-form" },
+      { name: "Change Company", href: "/change-company" },
+    ],
+  },
+  {
     name: "Items",
     icon: <TbShoppingBag />, subItems: [
       { name: "Products", href: mainRoute + "/items/products" },
