@@ -7,7 +7,7 @@ import { GoBell } from "react-icons/go";
 import { GrCloudUpload } from "react-icons/gr";
 import { ImBlog } from "react-icons/im";
 import { IoMdClose, IoMdSync } from "react-icons/io";
-import { IoChevronDownSharp, IoSearch } from "react-icons/io5";
+import { IoChevronDownSharp, IoSearch, IoSettingsOutline } from "react-icons/io5";
 import { PiBankLight, PiUsers } from "react-icons/pi";
 import { TbShoppingBag } from "react-icons/tb";
 import { IoCartOutline } from "react-icons/io5";
@@ -23,6 +23,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "./style.css";
+import SettingsModal from "@/components/inventory/SettingsModal";
 
 const mainRoute = "/inventory";
 
@@ -44,6 +45,10 @@ const initMenuItems = [
     subItems: [
       { name: "Purchase Form", href: mainRoute + "/testing/purchase-form" },
       { name: "Item Form", href: mainRoute + "/testing/item-form" },
+      { name: "Add More Menu Col", href: mainRoute + "/testing/menucolumn" },
+      { name: "Edit Profile", href: mainRoute + "/testing/edit-profile" },
+      { name: "Notification", href: mainRoute + "/testing/notification" },
+      { name: "Setting Modal", href: mainRoute + "/testing/setting-modal" },
       { name: "Change Company", href: "/change-company" },
     ],
   },
@@ -59,7 +64,7 @@ const initMenuItems = [
   {
     name: "Sales",
     icon: <HiOutlineReceiptPercent />, subItems: [
-      { name: "Sale Invoices", href: mainRoute +  "/sales/sale-invoices" },
+      { name: "Sale Invoices", href: mainRoute + "/sales/sale-invoices" },
       { name: "Estimate/ Quotation", href: mainRoute + "/sales/estimate-quotation" },
       { name: "Proforma Invoice", href: mainRoute + "/sales/proforma-invoice" },
       { name: "Payment-In", href: mainRoute + "/sales/payment-in" },
@@ -104,7 +109,7 @@ const initMenuItems = [
   {
     name: "Sync, Share & Backup",
     icon: <IoMdSync />, subItems: [
-      { name: "Sync & Share", href: mainRoute + "/sync-share-backup/sync-share"},
+      { name: "Sync & Share", href: mainRoute + "/sync-share-backup/sync-share" },
       { name: "Auto Backup", href: mainRoute + "/sync-share-backup/auto-backup" },
       { name: "Backup To Computer", href: mainRoute + "/sync-share-backup/backup-to-computer" },
       { name: "Backup To Drive", href: mainRoute + "/sync-share-backup/backup-to-drive" },
@@ -204,6 +209,7 @@ const Layout = (props) => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [menuItems, setMenuItems] = useState(initMenuItems || []);
   const [searchValue, setSearchValue] = useState("");
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // Start closed
 
   // Replaced with static data since Firebase auth is removed
   const defaultAvatar = `/default-avatar.png`; // Placeholder for a local or default avatar URL
@@ -272,7 +278,6 @@ const Layout = (props) => {
   };
 
   return (
-    // Removed <QueryClientProvider> and <AdminPrivateRoute>
     <div className={`flex ${toggleSidebar ? "gap-5" : "gap-0"}`}>
       {/* sidebar 	*/}
       <div
@@ -422,7 +427,8 @@ const Layout = (props) => {
             Add New <AiOutlinePlus size={16} />
           </Link>
           <GoBell className="text-gray-700 cursor-pointer" size={24} />
-          <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+          <button onClick={() => setIsSettingsOpen(true)}> <IoSettingsOutline className="text-gray-700 cursor-pointer" size={24} /></button>
+          <div onClick={() => setIsSettingsOpen(true)} className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
             <img
               width={30}
               height={30}
@@ -431,7 +437,7 @@ const Layout = (props) => {
               className="rounded-full"
             />
           </div>
-          <div className="text-gray-700 flex flex-col">
+          <div onClick={() => setIsSettingsOpen(true)} className="text-gray-700 flex flex-col cursor-pointer">
             <span className="block font-semibold">
               {/* Removed dynamic user data */}
               Admin User
@@ -440,6 +446,11 @@ const Layout = (props) => {
           </div>
         </div>
       </div>
+
+      <SettingsModal
+        isVisible={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
     </div>
     // Removed <QueryClientProvider> closing tag
   );

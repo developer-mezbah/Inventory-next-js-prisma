@@ -1,13 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { BiMinus, BiPlus, BiTrash } from "react-icons/bi"
+import { BiMinus, BiPlus } from "react-icons/bi"
 
 export default function PricingTab({ formData, onChange }) {
     const [wholesalePrices, setWholesalePrices] = useState(false)
-
-
-
     return (
         <div className="space-y-8">
             {/* Sale Price */}
@@ -22,11 +19,11 @@ export default function PricingTab({ formData, onChange }) {
                         placeholder="0.00"
                         step="0.01"
                         min="0"
-                        id="floating_outlined"
+                        id="saleprice"
                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 shadow appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     />
                     <label
-                        htmlFor="floating_outlined"
+                        htmlFor="saleprice"
                         className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                     >
                         Amount
@@ -45,10 +42,11 @@ export default function PricingTab({ formData, onChange }) {
                         placeholder="0.00"
                         step="0.01"
                         min="0"
+                        id="purprice"
                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 shadow appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     />
                     <label
-                        htmlFor="floating_outlined"
+                        htmlFor="purprice"
                         className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                     >
                         Amount
@@ -72,13 +70,12 @@ export default function PricingTab({ formData, onChange }) {
                                 <div className="relative">
                                     <input
                                         type="number"
-
                                         placeholder="0.00"
-                                        id="floating_outlined"
+                                        id="price2"
                                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 shadow appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     />
                                     <label
-                                        htmlFor="floating_outlined"
+                                        htmlFor="price2"
                                         className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                                     >
                                         Price
@@ -92,11 +89,11 @@ export default function PricingTab({ formData, onChange }) {
                                         type="number"
                                         placeholder="0"
                                         min="0"
-                                        id="floating_outlined"
+                                        id="minqty"
                                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 shadow appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     />
                                     <label
-                                        htmlFor="floating_outlined"
+                                        htmlFor="minqty"
                                         className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                                     >
                                         Min Qty
