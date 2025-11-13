@@ -7,7 +7,11 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     // Fetch images from the MongoDB collection using Prisma
-    const images = await prisma.image.findMany();
+    const images = await prisma.image.findMany({
+      orderBy: {
+        id: 'desc', // Assuming 'id' is a good proxy for creation order in MongoDB/Prisma
+      },
+    });
 
     // Use NextResponse for returning structured JSON responses
     return NextResponse.json(images, { status: 200 });
