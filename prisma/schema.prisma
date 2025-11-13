@@ -14,3 +14,15 @@ model User {
   age   Int?
   createdAt DateTime @default(now())
 }
+
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  file_name String
+  file_size Int
+  img_url   String // The secure URL from Cloudinary
+  public_id String @unique // Crucial for identifying the asset for deletion and ensuring uniqueness
+  // Optional: You might want to track who uploaded it (if you implement authentication)
+  // userId    String? @db.ObjectId
+}

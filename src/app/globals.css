@@ -166,3 +166,15 @@ body {
 .animate-fade-in {
   animation: fadeIn 0.15s ease-out;
 }
+
+
+/* Height Effect */
+.height-effect {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.height-effect > div {
+  overflow: hidden;
+}

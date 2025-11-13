@@ -49,6 +49,7 @@ const initMenuItems = [
       { name: "Edit Profile", href: mainRoute + "/testing/edit-profile" },
       { name: "Notification", href: mainRoute + "/testing/notification" },
       { name: "Setting Modal", href: mainRoute + "/testing/setting-modal" },
+      { name: "Category Selector", href: mainRoute + "/testing/category" },
       { name: "Change Company", href: "/change-company" },
     ],
   },
