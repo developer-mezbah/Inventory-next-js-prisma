@@ -1,7 +1,6 @@
 // app/api/media/images/route.js
 import prisma from "@/lib/prisma";
 import cloudinary from '@/lib/cloudinary';
-import { NextResponse } from "next/server";
 
 // Handler for GET /api/media/images
 export async function GET() {
@@ -14,12 +13,12 @@ export async function GET() {
     });
 
     // Use NextResponse for returning structured JSON responses
-    return NextResponse.json(images, { status: 200 });
+    return Response.json(images, { status: 200 });
 
   } catch (error) {
     console.error('Error fetching images:', error);
     // Return a 500 error response
-    return NextResponse.json(
+    return Response.json(
       { error: error.message || 'Internal Server Error' },
       { status: 500 }
     );
@@ -35,7 +34,7 @@ export async function POST(request) {
     const images = formData.getAll('images'); // 'images' must match the input name attribute
 
     if (images.length === 0) {
-      return NextResponse.json({ message: "No files uploaded" }, { status: 400 });
+      return Response.json({ message: "No files uploaded" }, { status: 400 });
     }
 
     // 2. Upload files to Cloudinary
@@ -68,7 +67,7 @@ export async function POST(request) {
       data: imageDetails,
     });
 
-    return NextResponse.json({
+    return Response.json({
       message: "Images uploaded successfully",
       images: savedImages,
       status: true,
@@ -76,7 +75,7 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('Error during upload:', error);
-    return NextResponse.json(
+    return Response.json(
       { error: error.message || 'Internal Server Error', status: false },
       { status: 500 }
     );
@@ -90,7 +89,7 @@ export async function DELETE(request) {
     const { public_ids } = await request.json(); // Array of public IDs
 
     if (!public_ids || public_ids.length === 0) {
-      return NextResponse.json(
+      return Response.json(
         { message: "No images specified for deletion" },
         { status: 400 }
       );
@@ -109,10 +108,10 @@ export async function DELETE(request) {
       },
     });
 
-    return NextResponse.json({ message: "Images deleted successfully", status: true }, { status: 200 });
+    return Response.json({ message: "Images deleted successfully", status: true }, { status: 200 });
   } catch (error) {
     console.error('Error during deletion:', error);
-    return NextResponse.json(
+    return Response.json(
       { error: error.message || 'Internal Server Error' },
       { status: 500 }
     );
