@@ -6,16 +6,14 @@ import cloudinary from '@/lib/cloudinary';
 export async function GET() {
   try {
     // Fetch images from the MongoDB collection using Prisma
-    // const images = await prisma.image.findMany({
-    //   orderBy: {
-    //     id: 'desc', // Assuming 'id' is a good proxy for creation order in MongoDB/Prisma
-    //   },
-    // });
-
-     const users = await prisma.user.findMany();
+    const images = await prisma.image.findMany({
+      orderBy: {
+        id: 'desc', // Assuming 'id' is a good proxy for creation order in MongoDB/Prisma
+      },
+    });
 
     // Use NextResponse for returning structured JSON responses
-    return Response.json(users, { status: 200 });
+    return Response.json(images, { status: 200 });
 
   } catch (error) {
     console.error('Error fetching images:', error);
