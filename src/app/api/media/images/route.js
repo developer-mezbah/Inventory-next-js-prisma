@@ -1,17 +1,13 @@
 // app/api/media/images/route.js
 import prisma from "@/lib/prisma";
-import { NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
+import { NextResponse } from "next/server";
 
 // Handler for GET /api/media/images
 export async function GET() {
   try {
     // Fetch images from the MongoDB collection using Prisma
-    const images = await prisma.image.findMany({
-      orderBy: {
-        id: 'desc', // Assuming 'id' is a good proxy for creation order in MongoDB/Prisma
-      },
-    });
+    const images = await prisma.image.findMany();
 
     // Use NextResponse for returning structured JSON responses
     return NextResponse.json(images, { status: 200 });
