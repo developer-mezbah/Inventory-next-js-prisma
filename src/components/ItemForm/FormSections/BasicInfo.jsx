@@ -9,6 +9,7 @@ import { useCallback, useState } from "react"
 import UnitBox from "../UnitBox"
 import { IoClose } from "react-icons/io5"
 import useOutsideClick from "@/hook/useOutsideClick"
+import Media from "@/components/gallery/Media"
 
 
 export default function BasicInfo({ formData, onChange, type }) {
@@ -17,6 +18,7 @@ export default function BasicInfo({ formData, onChange, type }) {
     const [secondaryUnit, setSecondaryUnit] = useState('None');
     const [activeDropdown, setActiveDropdown] = useState(null); // 'base' or 'secondary'
     const [showUnitModal, setShowUnitModal] = useState(false);
+    const [images, setImages] = useState([]);
 
     const dropdownRef = useOutsideClick(() => setShowUnitModal(false));
 
@@ -82,6 +84,9 @@ export default function BasicInfo({ formData, onChange, type }) {
                     >
                         Select Unit
                     </div>
+                </div>
+                <div>
+                    <Media subTitle="Click to upload image PNG, JPG, GIF up to 5MB" images={images} setImages={setImages} />
                 </div>
             </div>
 
